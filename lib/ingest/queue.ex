@@ -1,8 +1,6 @@
 defmodule Queue do
   use GenServer
-  alias GenServer
-
-  def new(state \\ []), do: start_link(__MODULE__, state, name: __MODULE__)
+  def new(state \\ []), do: GenServer.start_link(__MODULE__, state, name: __MODULE__)
   def get_state, do: GenServer.call(__MODULE__, :get_state)
   def enqueue(item), do: GenServer.cast(__MODULE__, {:enqueue, item})
   def dequeue, do: GenServer.call(__MODULE__, :dequeue)
